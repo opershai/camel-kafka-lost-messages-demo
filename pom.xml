@@ -15,7 +15,7 @@
 
     <properties>
         <java.version>17</java.version>
-        <camel.version>3.18.5</camel.version>
+        <camel.version>3.20.0</camel.version>
         <scala-lang.version>2.13.10</scala-lang.version>
     </properties>
 

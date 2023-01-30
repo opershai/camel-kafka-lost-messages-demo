@@ -11,8 +11,8 @@ with Camel Kafka component when:
 
 ## Versions
 * java 17
-* Spring boot 2.7.6
-* Camel 3.20.0, 3.18.5
+* Spring boot 2.7.7
+* Camel 3.20.1, 3.18.5
 
 ## Test Scenario
 
@@ -32,9 +32,9 @@ Steps:
 6. breakOnFirstError=true causes camel-route to reconnect and poll from the committed offset
 7. camel-route polls 5 messages: 2,3,4,5,6
 8. camel-route fails with processing message=2 second time 
-9. *ACTUAL:* camel-route polls messages 7,8,9 - as result messages 3,4,5,6 are never processed
+9. *ACTUAL:* camel-route reconnects and polls messages 7,8,9 - as result messages 3,4,5,6 are never processed
 
 *EXPECTED:* camel-route should do the following on the step 9:
-- poll the same 5 messages again: 2,3,4,5,6
+- reconnect and poll the same 5 messages again: 2,3,4,5,6
 - process message=2 third time (the test is configured to succeed on the 3rd attempt)
-- continue with processing messages 3,4,5,6,7,8,9
+- continue with processing messages 3,4,5,6...

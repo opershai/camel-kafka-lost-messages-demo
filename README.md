@@ -1,18 +1,14 @@
 # camel-kafka-lost-messages-demo
 
-Project with test demonstrating potential bug when messages are getting lost (skipped processing)
-with Camel Kafka component when:
-- autoCommitEnable=false
-- allowManualCommit=true
-- breakOnFirstError=true
-- autoOffsetReset=earliest
-- maxPollRecords is greater than one
-- processing of a particular message failed several times in a raw 
+Project with test demonstrating issue in [(CAMEL-18985) camel-kafka: messages are getting lost with "breakOnFirstError"](https://issues.apache.org/jira/browse/CAMEL-18985)
+
+## Description:
+Messages are getting lost with "breakOnFirstError=true" when processing of a particular message failed several times in a raw.
 
 ## Versions
 * java 17
 * Spring boot 2.7.7
-* Camel 3.20.1, 3.18.5
+* Camel 3.20.1, 3.20.0, 3.19.0, 3.18.5
 
 ## Test Scenario
 
@@ -21,7 +17,7 @@ Kafka component configuration:
 - allowManualCommit=true
 - breakOnFirstError=true
 - autoOffsetReset=earliest
-- maxPollRecords=5
+- maxPollRecords is greater than one (e.g. 5 in this test)
 
 Steps:
 1. inbound-topic contains 10 messages: 0,1,2,3,4,5,6,7,8,9

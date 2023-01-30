@@ -11,7 +11,7 @@ with Camel Kafka component when:
 
 ## Versions
 * java 17
-* Spring boot 2.7.7
+* Spring boot 2.7.8
 * Camel 3.20.1, 3.18.5
 
 ## Test Scenario

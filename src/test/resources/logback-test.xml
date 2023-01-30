@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
-    <appender name="DEFAULT" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>[%date] [%level] [%class{36}.%M]: %msg%n</pattern>
         </encoder>
     </appender>
-    <appender name="COLOR" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>[%date] [%level] [%class{36}]: %highlight(%msg)%n</pattern>
-        </encoder>
-    </appender>
 
-    <logger name="org.apache.camel.component.kafka" level="debug" additivity="false">
-        <appender-ref ref="DEFAULT"/>
-    </logger>
-
-    <logger name="testLogger" level="info" additivity="false">
-        <appender-ref ref="COLOR"/>
-    </logger>
+    <logger name="org.apache.camel.component.kafka" level="debug"/>
+    <logger name="testLogger" level="info"/>
 
     <root level="warn">
-        <appender-ref ref="DEFAULT"/>
+        <appender-ref ref="CONSOLE"/>
     </root>
 </configuration>

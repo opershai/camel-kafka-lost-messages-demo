@@ -37,4 +37,4 @@ Steps:
 *EXPECTED:* camel-route should do the following on the step 9:
 - reconnect and poll the same 5 messages again: 2,3,4,5,6
 - process message=2 third time (the test is configured to succeed on the 3rd attempt)
-- continue with processing messages 3,4,5,6...
+- continue with processing messages 3,4,5,6..

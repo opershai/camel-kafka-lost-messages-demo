@@ -2,13 +2,18 @@
 
 Project with test demonstrating issue in [(CAMEL-18985) camel-kafka: messages are getting lost with "breakOnFirstError"](https://issues.apache.org/jira/browse/CAMEL-18985)
 
-## Description:
+## Description
 Messages are getting lost with "breakOnFirstError=true" when processing of a particular message failed several times in a raw.
 
-## Versions
+## Versions (fail)
 * java 17
 * Spring boot 2.7.7
 * Camel 3.20.1, 3.20.0, 3.19.0, 3.18.5
+* 
+## Versions (pass)
+* java 8
+* Spring Boot 2.1.6.RELEASE
+* Camel 2.24.0
 
 ## Test Scenario
 

@@ -11,6 +11,7 @@ import org.apache.camel.component.kafka.KafkaManualCommit;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.javaconfig.SingleRouteCamelConfiguration;
 import org.apache.camel.test.spring.CamelSpringRunner;
+import org.junit.After;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,10 +30,18 @@ public class LostMessagesTest {
     private static final Logger LOG = LoggerFactory.getLogger("testLogger");
 
     @ClassRule
-    public static EmbeddedKafkaRule embeddedKafka = new EmbeddedKafkaRule(1, true);
+    public static final EmbeddedKafkaRule embeddedKafka = new EmbeddedKafkaRule(1, true);
 
     @EndpointInject(uri = "mock:kafka:outbound-topic")
     protected MockEndpoint outboundTopicMock;
+
+    @Autowired
+    private CamelContext camelContext;
+
+    @After
+    public void stopCamelContext() throws Exception {
+        camelContext.stop();
+    }
 
     @Test
     public void breakOnFirstErrorLostMessages() throws Exception {
@@ -42,7 +51,6 @@ public class LostMessagesTest {
 
         outboundTopicMock.assertIsSatisfied();
     }
-
 
     private void sendMessagesToTopic(String topic, String... messages) {
         KafkaTemplate<String, String> kafkaTemplate = new KafkaTemplate<>(
@@ -57,7 +65,7 @@ public class LostMessagesTest {
     @Configuration
     public static class ContextConfig extends SingleRouteCamelConfiguration {
 
-        int attemptToProcessSecondMessage = 1;
+        private int attemptToProcessSecondMessage = 1;
 
         @Bean
         @Autowired
